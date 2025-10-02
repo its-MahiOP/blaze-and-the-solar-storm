@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { OrbitControls, Sphere, Stars } from "@react-three/drei";
 import * as THREE from "three";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Zap } from "lucide-react";
 import { toast } from "sonner";
+import earthTexture from "@/assets/earth-texture.jpg";
 
 // Sun component with pulsing animation
 function Sun({ onFlare }: { onFlare: () => void }) {
@@ -42,6 +43,7 @@ function Sun({ onFlare }: { onFlare: () => void }) {
 function Earth({ auroraIntensity = 0 }: { auroraIntensity?: number }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const auroraRef = useRef<THREE.Mesh>(null);
+  const texture = useLoader(THREE.TextureLoader, earthTexture);
   
   useFrame(() => {
     if (meshRef.current) {
@@ -57,9 +59,9 @@ function Earth({ auroraIntensity = 0 }: { auroraIntensity?: number }) {
       {/* Earth */}
       <Sphere ref={meshRef} args={[1, 64, 64]}>
         <meshStandardMaterial
-          color="#2266dd"
-          roughness={0.7}
-          metalness={0.2}
+          map={texture}
+          roughness={0.8}
+          metalness={0.1}
         />
       </Sphere>
       
