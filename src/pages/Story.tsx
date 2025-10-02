@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ChevronRight, ChevronLeft, Sparkles } from "lucide-react";
 import sunClose from "@/assets/sun-close.jpg";
+import { Canvas } from "@react-three/fiber";
+import { Stars } from "@react-three/drei";
 
 interface StoryPage {
   title: string;
@@ -116,27 +118,79 @@ const storyPages: StoryPage[] = [
 
 const Story = () => {
   const [currentPage, setCurrentPage] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const handleChoice = (nextPage: number) => {
-    setCurrentPage(nextPage);
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentPage(nextPage);
+      setIsAnimating(false);
+    }, 300);
   };
 
   const handleNext = () => {
     if (currentPage < storyPages.length - 1) {
-      setCurrentPage(currentPage + 1);
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentPage(currentPage + 1);
+        setIsAnimating(false);
+      }, 300);
     }
   };
 
   const handlePrev = () => {
     if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentPage(currentPage - 1);
+        setIsAnimating(false);
+      }, 300);
     }
   };
 
   const page = storyPages[currentPage];
 
+  // Trigger content animation on page change
+  useEffect(() => {
+    setIsAnimating(true);
+    const timer = setTimeout(() => setIsAnimating(false), 100);
+    return () => clearTimeout(timer);
+  }, [currentPage]);
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* 3D Background */}
+      <div className="fixed inset-0 -z-10">
+        <Canvas camera={{ position: [0, 0, 5] }}>
+          <Stars 
+            radius={100} 
+            depth={50} 
+            count={5000} 
+            factor={4} 
+            saturation={0} 
+            fade 
+            speed={1}
+          />
+          <ambientLight intensity={0.2} />
+        </Canvas>
+      </div>
+
+      {/* Animated particle overlay */}
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-primary/30 rounded-full animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${5 + Math.random() * 10}s`,
+            }}
+          />
+        ))}
+      </div>
+
       <Navigation />
       
       <div className="container mx-auto px-6 pt-24 pb-12">
@@ -158,11 +212,14 @@ const Story = () => {
 
         {/* Story Content */}
         <div className="max-w-4xl mx-auto">
-          <Card className="glass p-8 md:p-12 min-h-[500px] relative overflow-hidden">
+          <Card className="glass p-8 md:p-12 min-h-[500px] relative overflow-hidden group hover:scale-[1.02] transition-all duration-500">
+            {/* Animated gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 animate-pulse-glow" />
+            
             {/* Background decoration */}
             {page.image && (
               <div 
-                className="absolute inset-0 opacity-10"
+                className="absolute inset-0 opacity-10 transition-opacity duration-700"
                 style={{
                   backgroundImage: `url(${page.image})`,
                   backgroundSize: 'cover',
@@ -171,8 +228,18 @@ const Story = () => {
               />
             )}
 
+            {/* Sparkle effects */}
+            <div className="absolute top-4 right-4">
+              <Sparkles className="h-6 w-6 text-accent animate-pulse-glow" />
+            </div>
+            <div className="absolute bottom-4 left-4">
+              <Sparkles className="h-6 w-6 text-primary animate-pulse-glow" />
+            </div>
+
             {/* Content */}
-            <div className="relative z-10 space-y-6">
+            <div className={`relative z-10 space-y-6 transition-all duration-500 ${
+              isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+            }`}>
               {/* Progress indicator */}
               <div className="flex items-center justify-between mb-8">
                 <span className="text-sm text-muted-foreground">
@@ -195,18 +262,18 @@ const Story = () => {
               </div>
 
               {/* Story title */}
-              <h2 className="text-3xl md:text-4xl font-bold text-primary">
+              <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent animate-fade-in">
                 {page.title}
               </h2>
 
               {/* Story content */}
-              <p className="text-lg leading-relaxed text-foreground/90">
+              <p className="text-lg leading-relaxed text-foreground/90 animate-fade-in" style={{ animationDelay: '0.1s' }}>
                 {page.content}
               </p>
 
               {/* Interactive choices */}
               {page.choices && page.choices.length > 0 && (
-                <div className="space-y-3 pt-6">
+                <div className="space-y-3 pt-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
                   <p className="text-sm font-medium text-muted-foreground">
                     What would you like to learn about?
                   </p>
@@ -215,8 +282,10 @@ const Story = () => {
                       key={idx}
                       onClick={() => handleChoice(choice.next)}
                       variant="outline"
-                      className="w-full justify-start h-auto py-4 px-6 text-left glass hover:border-primary hover:bg-primary/10 transition-all"
+                      className="w-full justify-start h-auto py-4 px-6 text-left glass hover:border-primary hover:bg-primary/10 hover:scale-[1.02] transition-all duration-300 hover:glow-solar group"
+                      style={{ animationDelay: `${0.3 + idx * 0.1}s` }}
                     >
+                      <ChevronRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                       <span className="text-base">{choice.text}</span>
                     </Button>
                   ))}
@@ -226,27 +295,27 @@ const Story = () => {
           </Card>
 
           {/* Navigation */}
-          <div className="flex justify-between items-center mt-8">
+          <div className="flex justify-between items-center mt-8 animate-fade-in">
             <Button
               onClick={handlePrev}
               disabled={currentPage === 0}
               variant="outline"
-              className="gap-2"
+              className="gap-2 hover:scale-105 transition-all hover:glow-aurora"
             >
               <ChevronLeft className="h-4 w-4" />
               Previous
             </Button>
 
-            <span className="text-sm text-muted-foreground">
+            <span className="text-sm text-muted-foreground animate-pulse">
               {currentPage === storyPages.length - 1
-                ? "The End"
+                ? "🌟 The End 🌟"
                 : "Continue reading"}
             </span>
 
             <Button
               onClick={handleNext}
               disabled={currentPage === storyPages.length - 1}
-              className="gap-2 bg-gradient-to-r from-primary to-secondary"
+              className="gap-2 bg-gradient-to-r from-primary to-secondary hover:scale-105 transition-all hover:glow-solar"
             >
               Next
               <ChevronRight className="h-4 w-4" />
