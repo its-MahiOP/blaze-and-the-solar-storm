@@ -3,9 +3,6 @@ import { Rocket, BookOpen, Eye, Globe, Gamepad2, Compass } from "lucide-react";
 
 export const Navigation = () => {
   const location = useLocation();
-  const isHome = location.pathname === "/";
-
-  if (isHome) return null;
 
   const navItems = [
     { path: "/", label: "Home", icon: Rocket },

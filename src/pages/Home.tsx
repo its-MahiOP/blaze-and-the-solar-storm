@@ -1,5 +1,6 @@
 import { Telescope, BookOpen, LineChart, Gamepad2 } from "lucide-react";
 import { ModeCard } from "@/components/ModeCard";
+import { Navigation } from "@/components/Navigation";
 import spaceBackground from "@/assets/space-background.jpg";
 
 const Home = () => {
@@ -40,6 +41,8 @@ const Home = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
+      <Navigation />
+      
       {/* Hero Background */}
       <div 
         className="absolute inset-0 z-0"
@@ -56,7 +59,7 @@ const Home = () => {
       {/* Content */}
       <div className="relative z-10">
         {/* Hero Section */}
-        <section className="container mx-auto px-6 pt-20 pb-12">
+        <section className="container mx-auto px-6 pt-28 pb-12">
           <div className="text-center space-y-6 animate-float">
             <h1 className="text-6xl md:text-7xl font-bold">
               <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
