@@ -60,17 +60,22 @@ function Earth({ auroraIntensity = 0 }: { auroraIntensity?: number }) {
       <Sphere ref={meshRef} args={[1, 64, 64]}>
         <meshStandardMaterial
           map={texture}
-          roughness={0.8}
-          metalness={0.1}
+          roughness={0.5}
+          metalness={0.3}
+          emissive="#1a3a5a"
+          emissiveIntensity={0.3}
         />
       </Sphere>
+      
+      {/* Earth lighting */}
+      <pointLight position={[0, 0, 0]} intensity={1.5} distance={5} color="#ffffff" />
       
       {/* Atmosphere glow */}
       <Sphere args={[1.1, 32, 32]}>
         <meshBasicMaterial
-          color="#4488ff"
+          color="#6699ff"
           transparent
-          opacity={0.2}
+          opacity={0.35}
           side={THREE.BackSide}
         />
       </Sphere>
@@ -146,7 +151,7 @@ export const SolarSystem3D = () => {
       <div className="w-full h-[600px] rounded-2xl overflow-hidden border-2 border-primary/30 glow-solar">
         <Canvas camera={{ position: [0, 5, 15], fov: 60 }}>
           <color attach="background" args={["#000510"]} />
-          <ambientLight intensity={0.1} />
+          <ambientLight intensity={0.3} />
           <Stars radius={300} depth={50} count={5000} factor={4} />
           
           <Sun onFlare={handleFlare} />
