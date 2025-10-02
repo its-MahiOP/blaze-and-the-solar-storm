@@ -8,6 +8,7 @@ import Simulation from "./pages/Simulation";
 import Story from "./pages/Story";
 import Dashboard from "./pages/Dashboard";
 import Game from "./pages/Game";
+import Impacts from "./pages/Impacts";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,8 +21,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/simulation" element={<Simulation />} />
           <Route path="/story" element={<Story />} />
+          <Route path="/impacts" element={<Impacts />} />
+          <Route path="/simulation" element={<Simulation />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/game" element={<Game />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

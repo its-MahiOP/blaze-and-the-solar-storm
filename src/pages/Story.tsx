@@ -14,49 +14,103 @@ interface StoryPage {
 
 const storyPages: StoryPage[] = [
   {
-    title: "Meet Blaze",
-    content: "Hi! I'm Blaze, a Coronal Mass Ejection born from the Sun's corona. Today, I'm going on an incredible journey to Earth! The Sun just released me during a powerful solar flare, and now I'm zooming through space at over 1,000 kilometers per second. That's more than a million miles per hour! Are you ready to travel with me?",
+    title: "🌞 Born on the Sun",
+    content: "Hi! I'm Blaze, a Coronal Mass Ejection! I was just born when the Sun had a BIG sneeze - a massive solar flare! Imagine billions of tons of hot, glowing plasma and magnetic energy bursting out into space. That's me! I'm carrying the Sun's energy, zooming through the cosmos at over 1,000 kilometers per second. That's SUPER fast - like a million miles per hour! Are you ready to travel with me on this incredible adventure?",
     image: sunClose,
-  },
-  {
-    title: "Leaving the Sun",
-    content: "As I leave the Sun's surface, I carry billions of tons of plasma and magnetic fields with me. The Sun's corona is super hot - about 1 million degrees Celsius! I'm part of a massive cloud of charged particles, and together we're heading toward Earth. The journey will take about 31 hours. Let me tell you about all the amazing things I'll encounter along the way!",
-  },
-  {
-    title: "Through the Solar Wind",
-    content: "I'm now traveling through the solar wind - a constant stream of particles flowing from the Sun. It's like swimming in a river of energy! As I zoom past Mercury and Venus, I'm getting closer to Earth. The solar wind helps push me along, and my magnetic field is getting stronger. Down on Earth, scientists are watching me with their satellites and telescopes.",
     choices: [
-      { text: "What happens when I reach Earth?", next: 3 },
-      { text: "How do scientists track me?", next: 4 },
+      { text: "Let's go! Tell me more about solar flares!", next: 1 },
+      { text: "Wow! What makes you so powerful?", next: 2 },
     ],
   },
   {
-    title: "Arriving at Earth",
-    content: "I've arrived! I'm now colliding with Earth's magnetosphere - its protective magnetic shield. The impact creates a beautiful light show called auroras near the North and South Poles. People on Earth see green, purple, and red lights dancing in the sky. But my arrival also causes some problems: GPS signals might get fuzzy, radio communications could be disrupted, and power grids need to be careful. Let me show you how I affect different people on Earth...",
+    title: "☀️ The Sun's Big Sneeze",
+    content: "When the Sun gets really active, its magnetic fields twist and tangle like spaghetti! Sometimes they snap - BOOM! That's a solar flare. It releases huge amounts of energy as light and radiation. And that's when CMEs like me are born! We're like the Sun's messengers, carrying its power across space. The Sun has these sneezes more often during its 'active' years - about every 11 years in the solar cycle.",
+    choices: [
+      { text: "Fascinating! Now let's start the journey to Earth!", next: 3 },
+      { text: "What happens if you're really strong?", next: 4 },
+    ],
   },
   {
-    title: "Scientists Tracking Me",
-    content: "NASA scientists at the Space Weather Prediction Center have been watching me since I left the Sun! They use satellites like SOHO and STEREO to track my journey. When they spotted me, they sent out alerts to airlines, power companies, and satellite operators. A scientist named Dr. Martinez is looking at her computer screen right now, watching my progress. Thanks to their early warning system, everyone on Earth can prepare for my arrival!",
+    title: "💪 My Power Level",
+    content: "Solar flares are classified as C, M, or X class - with X being the strongest! The bigger the flare, the more powerful CMEs like me become. If I come from an X-class flare, I can create major geomagnetic storms on Earth. But don't worry - Earth has a protective magnetic shield called the magnetosphere. It's like a superhero force field! Still, my impact can affect satellites, GPS, power grids, and create AMAZING auroras!",
+    choices: [
+      { text: "Amazing! Let's continue the journey!", next: 3 },
+    ],
   },
   {
-    title: "Affecting a Pilot",
-    content: "Captain Sarah is flying a plane from New York to London when I arrive. Because of me, she has to change her route! During strong geomagnetic storms like the one I'm causing, planes flying near the poles can experience radio blackouts. Sarah talks to air traffic control and adjusts her flight path to stay safe. She tells her passengers they might see beautiful auroras through the window!",
+    title: "🚀 Journey Through Space",
+    content: "I'm now zooming through the solar wind - a constant stream of particles flowing from the Sun. It's like surfing on a river of energy! As I pass Mercury and Venus, I'm getting closer to Earth. My journey takes about 31 hours, but sometimes I can be faster or slower depending on how strong the solar flare was. Down on Earth, scientists at NASA and NOAA are watching me with their satellites!",
+    choices: [
+      { text: "How do they track you?", next: 5 },
+      { text: "What happens when you reach Earth?", next: 6 },
+    ],
   },
   {
-    title: "Impact on a Farmer",
-    content: "Farmer Tom is working in his field in Canada when his GPS-guided tractor starts acting strange. His precision farming equipment depends on GPS satellites, and my arrival is interfering with the signals. Tom knows about space weather from his farming association's alerts. He decides to pause his work until I pass by. Tomorrow, when things are back to normal, his GPS will work perfectly again!",
+    title: "🛰️ The Strongest CMEs",
+    content: "When I come from a really powerful flare, I travel even FASTER - sometimes up to 3,000 kilometers per second! The strongest CMEs can cause major space weather events. But guess what? Scientists can see me coming! They track my speed, direction, and strength. This gives them time to warn astronauts, pilots, power grid operators, and satellite companies. Pretty cool, right?",
+    choices: [
+      { text: "Yes! How do they track you?", next: 5 },
+      { text: "Let's see what happens at Earth!", next: 6 },
+    ],
   },
   {
-    title: "Astronauts in Danger",
-    content: "On the International Space Station, astronauts Maria and James receive an alert: take shelter! Without Earth's protective atmosphere, they're more exposed to my radiation. They move to the most shielded part of the station and postpone their planned spacewalk. Even though I might seem scary, they're safe inside. They take this opportunity to photograph the amazing auroras I'm creating below!",
+    title: "🔭 Scientists Are Watching",
+    content: "NASA scientists at the Space Weather Prediction Center spotted me as soon as I left the Sun! They use amazing satellites like SOHO, STEREO, and the Solar Dynamics Observatory. These satellites take pictures of me and measure my speed and power. Dr. Martinez, a brilliant space weather scientist, is looking at her screens right now. She's sending alerts to airlines, power companies, and astronauts. Thanks to this early warning system, everyone can prepare!",
+    choices: [
+      { text: "That's smart! Now show me Earth's impact!", next: 6 },
+    ],
   },
   {
-    title: "Children Watching Auroras",
-    content: "In Norway, Emma and her family bundle up and go outside to watch the auroras I've created. The sky is filled with shimmering green curtains of light, dancing and swirling. Emma's dad explains how I traveled from the Sun and how my charged particles are colliding with atoms in Earth's atmosphere, creating this magical display. Emma decides she wants to be a space scientist when she grows up!",
+    title: "🌍 Arriving at Earth",
+    content: "I'm here! WHOOSH! I just collided with Earth's magnetosphere - its invisible magnetic shield. The impact is creating BEAUTIFUL auroras near the North and South Poles! People see green, purple, pink, and red lights dancing across the sky. It's magical! But my arrival also affects technology. Depending on my strength, I might cause GPS signals to wobble, radio communications to crackle, and power grids to fluctuate.",
+    choices: [
+      { text: "Show me how you affect satellites!", next: 7 },
+      { text: "What happens to pilots and planes?", next: 8 },
+      { text: "How do you impact people on Earth?", next: 9 },
+    ],
   },
   {
-    title: "My Journey Ends",
-    content: "As my energy spreads through Earth's magnetosphere, my journey comes to an end. I've traveled 150 million kilometers from the Sun! I've created beautiful auroras, taught people about space weather, and reminded everyone how connected Earth is to the Sun. But don't worry - more CMEs like me are always on their way. Every 11 years, the Sun goes through a solar cycle with lots of activity. Thanks for joining me on this adventure! Now you know how space weather affects our amazing planet. Keep looking up at the sky!",
+    title: "📡 Stella the Satellite Wobbles",
+    content: "Meet Stella, a GPS satellite orbiting Earth! When I arrive, Stella feels my charged particles pushing against her. Her signals start to wobble a bit - nothing dangerous, but GPS accuracy drops from a few meters to maybe 10-20 meters. For most people, that's okay! But for precision farming, airplane navigation, and surveying, it can be a problem. Stella sends an alert: 'Space weather event detected!' Her operators know to expect some signal delays.",
+    choices: [
+      { text: "Interesting! What about astronauts?", next: 10 },
+      { text: "Show me impacts on people below!", next: 9 },
+    ],
+  },
+  {
+    title: "✈️ Captain Sarah Changes Course",
+    content: "Captain Sarah is flying from New York to London when air traffic control sends her a message: 'Geomagnetic storm in progress - avoid polar routes.' Because of me, radio communications near the poles might experience blackouts. Sarah calmly adjusts her flight path, staying at lower latitudes where signals are stronger. She makes an announcement: 'Folks, we're taking a slightly different route today due to space weather. Look out the windows - you might see beautiful auroras!' Passengers press their faces to the glass in wonder.",
+    choices: [
+      { text: "Amazing! What about astronauts?", next: 10 },
+      { text: "Show me Earth impacts!", next: 9 },
+    ],
+  },
+  {
+    title: "🌾 Life on Earth During My Visit",
+    content: "Let me show you how I affect different people! In Canada, Farmer Tom's GPS-guided tractor acts a bit strange - the signals are fuzzy. He smiles and takes a break, knowing it's just space weather. In Texas, power grid operators watch their systems closely as voltage fluctuates slightly. In Norway, children play outside watching the auroras I created - green lights dancing like magic! Everyone is safe because scientists warned them I was coming.",
+    choices: [
+      { text: "What about astronauts in space?", next: 10 },
+      { text: "Tell me more about auroras!", next: 11 },
+    ],
+  },
+  {
+    title: "🧑‍🚀 Astronauts Take Shelter",
+    content: "On the International Space Station, alarm lights flash! Astronauts Maria and James receive an alert: 'CME impact imminent - take shelter in protected module.' They quickly move to the station's most shielded area. Up here, without Earth's atmosphere, they're more exposed to radiation. But they're safe in their special shelter! They postpone their spacewalk and instead take stunning photos of the auroras glowing below Earth. 'Look at those greens and purples!' Maria exclaims. 'Blaze put on quite a show!'",
+    choices: [
+      { text: "Beautiful! Tell me about auroras!", next: 11 },
+      { text: "What happens as your journey ends?", next: 12 },
+    ],
+  },
+  {
+    title: "🌈 The Aurora Gift",
+    content: "Auroras are my special gift to Earth! When my charged particles collide with oxygen and nitrogen atoms in Earth's atmosphere, they light up! Oxygen creates green and red auroras. Nitrogen makes blue and purple ones. The lights appear near the poles because Earth's magnetic field funnels my particles there. In Norway, Emma and her family watch the sky dance with shimmering curtains of light. 'It's like magic!' Emma whispers. Her dad smiles: 'It's science, sweetie - and it IS magical!'",
+    choices: [
+      { text: "That's beautiful! How does your journey end?", next: 12 },
+    ],
+  },
+  {
+    title: "👋 My Journey Ends",
+    content: "As my energy spreads through Earth's magnetosphere, I slowly fade away. I've traveled 150 million kilometers from the Sun - that's 93 million miles! I've created beautiful auroras, helped scientists learn more about space weather, and reminded everyone how connected Earth is to the Sun. Technology mostly survived with just minor hiccups because humans were prepared! More CMEs like me are always on the way - the Sun never stops being active. Thanks for joining me on this adventure! Now you understand how space weather affects our incredible planet. Keep looking up! 🌟",
   },
 ];
 
